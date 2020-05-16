@@ -193,3 +193,57 @@ class StreamLines extends Transform {
 }
 
 streams.StreamLines = StreamLines;
+
+
+class TagParser extends Writable {
+
+  constructor(opts) {
+    super(opts);
+    this.buffer = '';
+  }
+
+  parseTag(raw) {
+    let parsed = {};
+    
+    //console.log(raw, raw.substring(1,raw.length-1));
+    let tokens = raw.substring(1,raw.length-1).split(' ');
+
+    if( tokens[0].indexOf('!') === 0 ) {
+      parsed.type = 'comment';
+      parsed.name = tokens.shift().slice(1);
+      parsed.text = tokens.join(' ');
+    } else if( tokens[0].indexOf('/') === 0 ){
+      parsed.type = 'close';
+      parsed.name = tokens.shift().slice(1);
+    } else {
+      parsed.name = tokens.shift();
+      parsed.type = 'open';
+      for( let i in tokens ) {
+        let parts = tokens[i].split('=');
+        parsed[parts[0]] = parts[1];
+      }
+    }
+
+    return parsed;
+  }
+  
+  _write(data, encoding, callback) {
+    this.buffer += data.toString('utf8');
+    //console.log('new data', this.buffer);
+    
+    let start = this.buffer.indexOf('<');
+    let end = this.buffer.indexOf('>')+1;
+    while( start >= 0 && end >= 1 ){
+      let new_tag = this.parseTag(this.buffer.substring(start, end));
+      this.buffer = this.buffer.slice(end);
+      //console.log(start, end);
+      this.emit('xml_tag', new_tag);
+      start = this.buffer.indexOf('<');
+      end = this.buffer.indexOf('>')+1;
+    }
+
+    callback();
+  }
+}
+
+streams.TagParser = TagParser;
