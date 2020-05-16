@@ -1,0 +1,61 @@
+title: WritableOptions
+description: |
+  https://nodejs.org/api/stream.html#stream_constructor_new_stream_writable_options
+type: object
+properties:
+  highWaterMark:
+    type: integer
+    description: |
+      Buffer level when stream.write() starts returning false.
+      Default: 16384 (16KB), or 16 for objectMode streams.
+    default: 16384
+    minimumValue: 0
+  decodeString:
+    type: boolean
+    description: |
+      Whether to encode strings passed to stream.write() to Buffers (with the
+      encoding specified in the stream.write() call) before passing them to
+      stream._write(). Other types of data are not converted (i.e. Buffers are not
+      decoded into strings). Setting to false will prevent strings from being
+      converted.
+    default: true
+  defaultEncoding:
+    type: string
+    description: |
+      The default encoding that is used when no encoding is specified as an
+      argument to stream.write().
+    default: utf8
+    enum:
+      - utf8
+  objectMode:
+    type: boolean
+    description: |
+      Whether or not the stream.write(anyObj) is a valid operation. When set, it
+      becomes possible to write JavaScript values other than string, Buffer or
+      Uint8Array if supported by the stream implementation.
+    default: false
+  emitClose:
+    type: boolean
+    description: |
+      Whether or not the stream should emit 'close' after it has been destroyed.
+    default: true
+  write:
+    type: Function
+    description: |
+      Implementation for the stream._write() method.
+  writev:
+    type: Function
+    description: |
+      Implementation for the stream._writev() method.
+  destroy:
+    type: Function
+    description: |
+      Implementation for the stream._destroy() method.
+  final:
+    type: Function
+    description: |
+      Implementation for the stream._final() method.
+  autoDestroy:
+    type: boolean
+    description: |
+      Whether this stream should automatically call .destroy() on itself after ending. Default: true.
