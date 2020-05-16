@@ -92,7 +92,7 @@ const http = require('http');
 var hs = http.createServer((req, res) => {
 
   console.log(req.url);
-  console.log('sup');
+  console.log('new client');
   var ss = new ShellStream({});
   ss.pipe(new Writable({
     write(d, e, c) {
