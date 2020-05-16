@@ -1,0 +1,13 @@
+title: options
+type: object
+description: Passed to both Writable and Readable constructors. Also has the following fields:
+properties:
+  transform:
+    type: Function
+    description: Implementation for the stream._transform() method.
+  flush:
+    type: Function
+    description: Implementation for the stream._flush() method.
+allOf:
+  - $ref: readableOptions.yaml#
+  - $ref: writableOptions.yaml#

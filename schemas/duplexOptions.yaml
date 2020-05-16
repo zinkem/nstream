@@ -1,0 +1,37 @@
+options:
+type: Object
+description: |
+  Passed to both Writable and Readable constructors. Also has the following
+  fields:
+properties:
+  allowHalfOpen:
+    type: boolean
+    description: |
+      If set to false, then the stream will automatically end the writable side
+      when the readable side ends.
+    default: true
+  readableObjectMode:
+    type: boolean
+    description: |
+      Sets objectMode for readable side of the stream. Has no effect if
+      objectMode is true.
+    default: false
+  writableObjectMode:
+    type: boolean
+    description: |
+      Sets objectMode for writable side of the stream. Has no effect if
+      objectMode is true.
+    default: false
+  readableHighWaterMark:
+    type: number
+    description: |
+      Sets highWaterMark for the readable side of the stream. Has no effect if
+      highWaterMark is provided.
+  writableHighWaterMark:
+    type: number
+    description: |
+      Sets highWaterMark for the writable side of the stream. Has no effect if
+      highWaterMark is provided.
+allOf:
+  - $ref: readableOptions.yaml#
+  - $ref: writableOptions.yaml#  
