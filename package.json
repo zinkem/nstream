@@ -1,11 +1,11 @@
 {
   "name": "nstream",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "stream utilities",
   "main": "index.js",
   "scripts": {
-    "build": "docker build . --tag node_project_template",
-    "gendist": "docker create node_project_template | xargs -I$ docker cp $:/usr/src/app/ dist && rm -rf dist/node_modules",
+    "build": "docker build . --tag nstream",
+    "gendist": "docker create nstream | xargs -I$ docker cp $:/usr/src/app/ dist && rm -rf dist/node_modules",
     "test": "nyc npx mocha",
     "version": "npm run build && npm run gendist && git commit -a -m'release'",
     "postversion": "git push && git push --tags"
