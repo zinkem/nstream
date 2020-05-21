@@ -8,4 +8,5 @@ COPY lib/ lib/
 COPY index.js ./
 COPY bin/ bin/
 COPY server.js ./
+COPY README.md ./
 CMD npm start
