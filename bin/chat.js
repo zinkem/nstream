@@ -8,9 +8,8 @@ const { Broadcaster,
         ByteCounter,
         FilterStream,
         StreamStamper,
-        ShellStream } = require('./streams.js');
-const { Writable } = require('stream');
-
+        ShellStream,
+        Writable } = require('..');
 
 var broadcast = new PassThrough({ });
 broadcast.setMaxListeners(10000);
@@ -29,7 +28,7 @@ var server = net.createServer((socket) => {
   var bc = new ByteCounter();
   var filter1 = new FilterStream({ invert_match: false }, ':');
   // this is a profanity filter!
-  var filter2 = new FilterStream({ invert_match: true }, 'fuck');
+  var filter2 = new FilterStream({ invert_match: true }, 'pickle');
 
   var printStats = () => {
     console.log(wc.count, 'words');

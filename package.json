@@ -1,10 +1,14 @@
 {
   "name": "nstream",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "stream utilities",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "docker build . --tag node_project_template",
+    "gendist": "docker create node_project_template | xargs -I$ docker cp $:/usr/src/app/ dist && rm -rf dist/node_modules",
+    "test": "nyc npx mocha",
+    "version": "npm run build && npm run gendist && git commit -a -m'release'",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -18,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/zinkem/nstream/issues"
   },
-  "homepage": "https://github.com/zinkem/nstream#readme"
+  "homepage": "https://github.com/zinkem/nstream#readme",
+  "dependencies": {
+    "ajv": "^6.12.2",
+    "mustache": "^4.0.1"
+  }
 }
