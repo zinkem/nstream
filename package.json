@@ -18,11 +18,11 @@
     "stream"
   ],
   "author": "Matthew Zinke",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zinkem/nstream/issues"
   },
-  "homepage": "https://github.com/zinkem/nstream#readme",
+  "homepage": "https://github.com/zinkem/nstream",
   "dependencies": {
     "ajv": "^6.12.2",
     "mustache": "^4.0.1"
