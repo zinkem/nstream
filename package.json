@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "docker build . --tag nstream",
-    "gendist": "docker create nstream | xargs -I$ docker cp $:/usr/src/app/ dist && rm -rf dist/node_modules",
+    "gendist": "rm -rf dist/ && docker create nstream:latest | xargs -I$ docker cp $:/usr/src/app/ dist && rm -rf dist/node_modules",
     "test": "nyc npx mocha",
     "version": "npm run build && npm run gendist && git commit -a -m'release'",
     "postversion": "git push && git push --tags"
